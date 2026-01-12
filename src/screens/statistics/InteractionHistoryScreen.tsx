@@ -17,7 +17,6 @@ import { chatAPI } from '../../api/chat.api';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
-import { useLanguage } from '../../contexts/LanguageContext';
 // Temporarily disabled for stability
 // import LoadingOverlay from '../../components/LoadingOverlay';
 // import FadeInView from '../../components/FadeInView';
@@ -173,11 +172,7 @@ const InteractionHistoryScreen: React.FC = () => {
     const [hasMore, setHasMore] = useState(true);
     const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        loadInteractions(1);
-    }, []);
-
-    const loadInteractions = async (pageNum: number = 1, append: boolean = false) => {
+    const loadInteractions = useCallback(async (pageNum: number = 1, append: boolean = false) => {
         try {
             if (pageNum === 1) {
                 setLoading(true);
@@ -196,7 +191,11 @@ const InteractionHistoryScreen: React.FC = () => {
             setLoading(false);
             setRefreshing(false);
         }
-    };
+    }, [interactions.length]);
+
+    useEffect(() => {
+        loadInteractions(1);
+    }, [loadInteractions]);
 
     const onRefresh = async () => {
         setRefreshing(true);
@@ -273,7 +272,7 @@ const InteractionHistoryScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <MemoizedInteractionItem item={item} />
         </AnimatedListItem>
-    ), []);
+    ), [MemoizedInteractionItem]);
 
     return (
         <View style={styles.container}>

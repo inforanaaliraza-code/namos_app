@@ -3,7 +3,7 @@
  * Form to generate new contracts with dynamic fields based on contract type
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     View,
     Text,
@@ -18,13 +18,12 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchTemplates, generateContract, setFormData } from '../../store/slices/contractsSlice';
+import { fetchTemplates, generateContract } from '../../store/slices/contractsSlice';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ContractType, ContractTemplate, ContractField } from '../../types/contracts.types';
+import { ContractType, ContractField } from '../../types/contracts.types';
 import { Picker } from '@react-native-picker/picker';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
 // Lazy load DateTimePicker to avoid getConstants error
@@ -39,7 +38,7 @@ const GenerateContractScreen: React.FC = () => {
     const Colors = useColors();
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
-    const { templates, formData, isGenerating } = useAppSelector((state) => state.contracts);
+    const { templates, isGenerating } = useAppSelector((state) => state.contracts);
     const { t } = useTranslation();
 
 
@@ -64,7 +63,7 @@ const GenerateContractScreen: React.FC = () => {
 
     useEffect(() => {
         loadTemplates();
-    }, []);
+    }, [loadTemplates]);
 
     useEffect(() => {
         // Reset form when type changes
@@ -72,13 +71,13 @@ const GenerateContractScreen: React.FC = () => {
         setErrors({});
     }, [selectedType]);
 
-    const loadTemplates = async () => {
+    const loadTemplates = useCallback(async () => {
         try {
             await dispatch(fetchTemplates()).unwrap();
         } catch (error) {
             console.error('Error loading templates:', error);
         }
-    };
+    }, [dispatch]);
 
     const currentTemplate = templates.find((t) => t.type === selectedType);
 

@@ -22,7 +22,6 @@ import { CreditRequest } from '../../types/creditRequest.types';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
@@ -39,7 +38,7 @@ const CreditRequestHistoryScreen: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(0);
+    const [, setTotal] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const limit = 20;
 
@@ -275,11 +274,11 @@ const CreditRequestHistoryScreen: React.FC = () => {
             setLoading(false);
             setRefreshing(false);
         }
-    }, [t, limit]);
+    }, [t, limit, requests.length]);
 
     useEffect(() => {
         loadRequests(1, false);
-    }, []);
+    }, [loadRequests]);
 
     const onRefresh = () => {
         setPage(1);
@@ -413,7 +412,7 @@ const CreditRequestHistoryScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <RequestItem item={item} />
         </AnimatedListItem>
-    ), []);
+    ), [RequestItem]);
 
     const renderEmpty = () => (
         <View style={styles.emptyContainer}>

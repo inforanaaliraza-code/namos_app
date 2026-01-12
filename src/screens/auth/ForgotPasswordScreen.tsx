@@ -15,7 +15,6 @@ import Toast from 'react-native-toast-message';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { forgotPassword } from '../../store/slices/authSlice';
 import LanguageSelector from '../../components/LanguageSelector';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useColors } from '../../hooks/useColors';
 import { useTranslation } from 'react-i18next';
 import LoadingOverlay from '../../components/LoadingOverlay';
@@ -91,7 +90,7 @@ const ForgotPasswordScreen: React.FC = () => {
                 text2: t('auth.checkInbox'),
                 position: 'top',
             });
-        } catch (err) {
+        } catch {
             // Error handled by useEffect
         }
     };

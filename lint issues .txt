@@ -1,0 +1,761 @@
+PS C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app> npm run lint
+
+> Namos_App@0.0.1 lint
+> eslint .
+
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\App.tsx
+   31:16  warning  Inline style: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#FFFFFF'
+}  react-native/no-inline-styles
+  114:36  warning  Inline style: { flex: 1 }                                                                                      react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\api\credits.api.ts
+   79:33  error  'planId' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+   85:28  error  'intentId' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+   85:46  error  'paymentMethodId' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   97:30  error  'data' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  110:33  error  'methodId' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\BiometricPromptModal.tsx
+   21:9  error  'width' is assigned a value but never used
+
+                             @typescript-eslint/no-unused-vars
+   33:5  error  'biometricType' is defined but never used. Allowed unused args must match /^_/u
+
+                             @typescript-eslint/no-unused-vars
+  144:8  error  React Hook useEffect has missing dependencies: 'fingerprintPulseAnim', 'glowAnim', 'onConfirm', 'progressAnim', and 'scanLineAnim'. Either include them or remove the dependency array. If 'onConfirm' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\CardSkeletonLoader.tsx
+  22:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “CardSkeletonLoader” and pass data as props  react/no-unstable-nested-components
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\LanguageSelector.tsx
+   13:5   error    'I18nManager' is defined but never used  @typescript-eslint/no-unused-vars
+  133:57  warning  Inline style: { marginRight: 8 }         react-native/no-inline-styles
+  133:78  warning  Inline style: { marginLeft: 8 }          react-native/no-inline-styles
+  171:54  warning  Inline style: { flex: 1 }                react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\ListSkeletonLoader.tsx
+  20:5   error    'itemHeight' is assigned a value but never used. Allowed unused args must match /^_/u
+
+                                                                @typescript-eslint/no-unused-vars
+  26:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “ListSkeletonLoader” and pass data as props  react/no-unstable-nested-components
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\RTLText.tsx
+  7:27  error  'StyleSheet' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\SkeletonLoader.tsx
+  55:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “SkeletonLoader” and pass data as props  react/no-unstable-nested-components
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\components\animations\AnimatedButton.tsx
+  137:20  warning  Inline style: { opacity: 'disabled ? 0.5 : opacity' }                                                                     react-native/no-inline-styles
+  145:21  warning  Inline style: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 8
+}           react-native/no-inline-styles
+  172:40  warning  Inline style: { marginRight: 8 }                                                                                          react-native/no-inline-styles
+  177:33  warning  Inline style: {
+  color: "variant === 'outline' || variant === 'ghost' ? Colors.primary : '#fff'",
+  fontWeight: '600'
+}  react-native/no-inline-styles
+  192:40  warning  Inline style: { marginLeft: 8 }                                                                                           react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\contexts\LanguageContext.tsx
+  75:8  error  React Hook useCallback has an unnecessary dependency: 'language'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\hooks\useRTL.ts
+   7:10  error  'I18nManager' is defined but never used          @typescript-eslint/no-unused-vars
+  13:5   error  'getWritingDirection' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\navigation\AppNavigator.tsx
+  107:29  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “MainTabs” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true      react/no-unstable-nested-components
+  186:11  error    'RTLDashboard' is assigned a value but never used
+
+                                                                                                                                              @typescript-eslint/no-unused-vars
+  189:11  error    'RTLConversations' is assigned a value but never used
+
+                                                                                                                                              @typescript-eslint/no-unused-vars
+  192:11  error    'RTLCredits' is assigned a value but never used
+
+                                                                                                                                              @typescript-eslint/no-unused-vars
+  229:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “AppNavigator” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\navigation\RootNavigator.tsx
+   10:10  error    'useAppSelector' is defined but never used  @typescript-eslint/no-unused-vars
+  108:17  warning  Inline style: { direction: 'ltr' }          react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\AboutScreen.tsx
+  19:10  error  'useLanguage' is defined but never used              @typescript-eslint/no-unused-vars
+  33:11  error  'handleOpenLink' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\SearchScreen.tsx
+   14:5   error    'ActivityIndicator' is defined but never used
+
+                                                           @typescript-eslint/no-unused-vars
+   24:10  error    'useLanguage' is defined but never used
+
+                                                           @typescript-eslint/no-unused-vars
+  372:32  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “SearchScreen” and pass data as props  react/no-unstable-nested-components
+  419:8   error    React Hook useCallback has a missing dependency: 'MemoizedResultItem'. Either include it or remove the dependency array      
+
+                                                           react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\ForgotPasswordScreen.tsx
+   18:10  error    'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+   94:18  error    'err' is defined but never used          @typescript-eslint/no-unused-vars
+  321:39  warning  Inline style: { direction: 'ltr' }       react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\LoginScreen.tsx
+   28:5   error    'setBiometricEnabled' is defined but never used                                                       @typescript-eslint/no-unused-vars
+   53:30  warning  'setBiometricEnabled' is already declared in the upper scope on line 28 column 5                      @typescript-eslint/no-shadow
+   78:8   error    React Hook useEffect has a missing dependency: 't'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  107:11  warning  Value of 'error' may be overwritten in IE 8 and earlier                                               no-catch-shadow        
+  107:18  warning  'error' is already declared in the upper scope on line 43 column 24                                   @typescript-eslint/no-shadow
+  258:11  warning  Value of 'error' may be overwritten in IE 8 and earlier                                               no-catch-shadow        
+  258:18  warning  'error' is already declared in the upper scope on line 43 column 24                                   @typescript-eslint/no-shadow
+  346:18  error    'err' is defined but never used                                                                       @typescript-eslint/no-unused-vars
+  352:13  error    'start' is assigned a value but never used                                                            @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\OnboardingScreen.tsx
+   14:10  error  'useLanguage' is defined but never used
+                                                                       @typescript-eslint/no-unused-vars
+  222:8   error  React Hook useCallback has missing dependencies: 'styles.description', 'styles.icon', 'styles.iconContainer', 'styles.slide', and 'styles.title'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\RegisterScreen.tsx
+   28:5   error  'checkBiometricAvailability' is defined but never used                                                                      @typescript-eslint/no-unused-vars
+   29:5   error  'getBiometricTypeName' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+   32:5   error  'isBiometricEnabled' is defined but never used                                                                              @typescript-eslint/no-unused-vars
+   33:5   error  'setBiometricEnabled' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+   73:8   error  React Hook useEffect has a missing dependency: 't'. Either include it or remove the dependency array                        react-hooks/exhaustive-deps
+  164:18  error  'err' is defined but never used                                                                                             @typescript-eslint/no-unused-vars
+  226:8   error  React Hook React.useEffect has a missing dependency: 'formData.language'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  227:13  error  'isRTL' is assigned a value but never used                                                                                  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\ResetPasswordScreen.tsx
+   20:10  error    'useLanguage' is defined but never used
+              @typescript-eslint/no-unused-vars
+  256:8   error    React Hook useEffect has a missing dependency: 'navigation'. Either include it or remove the dependency array
+              react-hooks/exhaustive-deps
+  271:8   error    React Hook useEffect has missing dependencies: 'navigation', 't', and 'validateToken'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  422:39  warning  Inline style: { direction: 'ltr' }
+              react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\SplashScreen.tsx
+   8:10  error  'useLanguage' is defined but never used
+                  @typescript-eslint/no-unused-vars
+  36:8   error  React Hook useEffect has missing dependencies: 'checkAutoLogin', 'fadeAnim', and 'scaleAnim'. Either include them or remove the 
+dependency array  react-hooks/exhaustive-deps
+  59:18  error  'error' is defined but never used
+                  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\auth\VerifyEmailScreen.tsx
+   19:10  error    'useLanguage' is defined but never used
+                   @typescript-eslint/no-unused-vars
+   32:13  error    'isLoading' is assigned a value but never used
+                   @typescript-eslint/no-unused-vars
+   58:8   error    React Hook useEffect has a missing dependency: 'navigation'. Either include it or remove the dependency array
+                   react-hooks/exhaustive-deps
+   72:8   error    React Hook useEffect has missing dependencies: 'email', 'handleVerify', and 'route.params'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  149:11  warning  Value of 'error' may be overwritten in IE 8 and earlier
+                   no-catch-shadow
+  149:18  warning  'error' is already declared in the upper scope on line 32 column 24
+                   @typescript-eslint/no-shadow
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\chat\ChatScreen.tsx
+    31:5   error    'setIsTyping' is defined but never used
+
+                                                          @typescript-eslint/no-unused-vars
+    44:10  error    'useLanguage' is defined but never used
+
+                                                          @typescript-eslint/no-unused-vars
+    46:8   error    'PressableScale' is defined but never used
+
+                                                          @typescript-eslint/no-unused-vars
+    49:29  warning  '@typescript-eslint/no-var-requires' rule is disabled but never reported
+
+                                                          eslint-comments/no-unused-disable
+   113:11  error    The 'currentMessages' conditional could make the dependencies of useEffect Hook (at line 220) change on every render. To fix this, wrap the initialization of 'currentMessages' in its own useMemo() Hook
+                                                          react-hooks/exhaustive-deps
+   113:11  error    The 'currentMessages' conditional could make the dependencies of useEffect Hook (at line 246) change on every render. To fix this, wrap the initialization of 'currentMessages' in its own useMemo() Hook
+                                                          react-hooks/exhaustive-deps
+   113:11  error    The 'currentMessages' conditional could make the dependencies of useEffect Hook (at line 493) change on every render. To fix this, wrap the initialization of 'currentMessages' in its own useMemo() Hook
+                                                          react-hooks/exhaustive-deps
+   117:11  error    'suggestedQuestions' is assigned a value but never used
+
+                                                          @typescript-eslint/no-unused-vars
+   163:26  warning  Inline style: { flexDirection: 'row', alignItems: 'center', gap: 12, marginRight: 8 }
+
+                                                          react-native/no-inline-styles
+   170:87  warning  Inline style: { paddingHorizontal: 4, paddingVertical: 4 }
+
+                                                          react-native/no-inline-styles
+   179:32  warning  Inline style: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16 }
+
+                                                          react-native/no-inline-styles
+   181:38  warning  Inline style: { color: '#fff', fontWeight: '700' }
+
+                                                          react-native/no-inline-styles
+   193:8   error    React Hook useLayoutEffect has missing dependencies: 'DarkBG', 'DarkText', and 'handleExportConversation'. Either include them or remove the dependency array
+                                                          react-hooks/exhaustive-deps
+   515:15  warning  'DarkBG' is already declared in the upper scope on line 65 column 11
+
+                                                          @typescript-eslint/no-shadow
+   516:15  warning  'DarkCard' is already declared in the upper scope on line 66 column 11
+
+                                                          @typescript-eslint/no-shadow
+   518:15  warning  'DarkText' is already declared in the upper scope on line 68 column 11
+
+                                                          @typescript-eslint/no-shadow
+   519:15  warning  'DarkSub' is already declared in the upper scope on line 69 column 11
+
+                                                          @typescript-eslint/no-shadow
+  1220:11  error    'handleSuggestionPress' is assigned a value but never used
+
+                                                          @typescript-eslint/no-unused-vars
+  1378:11  error    'handleViewVersions' is assigned a value but never used
+
+                                                          @typescript-eslint/no-unused-vars
+  1421:40  warning  'conversationId' is already declared in the upper scope on line 71 column 13
+
+                                                          @typescript-eslint/no-shadow
+  1493:25  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of 
+the parent component “ChatScreen” and pass data as props  react/no-unstable-nested-components
+  1503:15  warning  'isLoading' is already declared in the upper scope on line 72 column 48
+
+                                                          @typescript-eslint/no-shadow
+  1525:48  warning  Inline style: { marginTop: 6 }
+
+                                                          react-native/no-inline-styles
+  1536:38  warning  Inline style: { flex: 1 }
+
+                                                          react-native/no-inline-styles
+  1539:50  warning  Inline style: { flexDirection: 'row', alignItems: 'center', gap: 8 }
+
+                                                          react-native/no-inline-styles
+  1544:90  warning  Inline style: { opacity: 0.6 }
+
+                                                          react-native/no-inline-styles
+  1560:48  warning  Inline style: { marginTop: 6 }
+
+                                                          react-native/no-inline-styles
+  1593:53  warning  Inline style: { marginTop: 4, justifyContent: 'space-between' }
+
+                                                          react-native/no-inline-styles
+  1598:33  warning  Inline style: { flexDirection: 'row', paddingHorizontal: 12, borderRadius: 20 }
+
+                                                          react-native/no-inline-styles
+  1621:42  warning  Inline style: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  marginRight: 0
+}
+                                                                               react-native/no-inline-styles
+  1628:46  warning  Inline style: { fontSize: 12, textAlign: 'center' }
+
+                                                          react-native/no-inline-styles
+  1648:9   error    React Hook useCallback has a missing dependency: 'MessageItem'. Either include it or remove the dependency array
+
+                                                          react-hooks/exhaustive-deps
+  1677:39  warning  Inline style: { direction: 'ltr' }
+
+                                                          react-native/no-inline-styles
+  1684:91  warning  Inline style: { padding: 6 }
+
+                                                          react-native/no-inline-styles
+  1688:89  warning  Inline style: { padding: 6 }
+
+                                                          react-native/no-inline-styles
+  1749:50  warning  Inline style: { flexDirection: 'row' }
+
+                                                          react-native/no-inline-styles
+  1987:36  warning  Inline style: { flex: 1, marginTop: 8 }
+
+                                                          react-native/no-inline-styles
+  1989:52  warning  Inline style: { paddingBottom: 16 }
+
+                                                          react-native/no-inline-styles
+  1994:48  warning  Inline style: { flex: 1 }
+
+                                                          react-native/no-inline-styles
+  2014:79  warning  Inline style: { marginTop: 8, paddingHorizontal: 4 }
+
+                                                          react-native/no-inline-styles
+  2046:46  warning  Inline style: { flex: 1 }
+
+                                                          react-native/no-inline-styles
+  2148:32  warning  Inline style: { flex: 1 }
+
+                                                          react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\chat\ConversationsScreen.tsx
+   11:5   error    'ActivityIndicator' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   23:10  error    'useLanguage' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   34:26  error    'isAuthenticated' is assigned a value but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+  331:8   error    React Hook useCallback has missing dependencies: 'styles.archiveAction', 'styles.deleteAction', 'styles.swipeActionText', and 'styles.swipeActionsContainer'. Either include them or remove the dependency array
+                                                                  react-hooks/exhaustive-deps
+  349:8   error    React Hook useCallback has missing dependencies: 'styles.swipeActionText' and 'styles.unarchiveAction'. Either include them or remove the dependency array
+                                                                  react-hooks/exhaustive-deps
+  351:30  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “ConversationsScreen” and pass data as props  react/no-unstable-nested-components
+  400:9   error    React Hook useCallback has a missing dependency: 'ConversationItem'. Either include it or remove the dependency array        
+
+                                                                  react-hooks/exhaustive-deps
+  404:41  warning  Inline style: { direction: 'ltr' }
+
+                                                                  react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\contracts\ContractsListScreen.tsx
+    6:51  error    'useMemo' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   17:5   error    'ActivityIndicator' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   26:10  error    'useLanguage' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   53:8   error    React Hook useEffect has a missing dependency: 'loadContracts'. Either include it or remove the dependency array
+
+                                                                  react-hooks/exhaustive-deps
+  105:18  error    'error' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+  190:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “ContractsListScreen” and pass data as props  react/no-unstable-nested-components
+  253:8   error    React Hook useCallback has a missing dependency: 'ContractItem'. Either include it or remove the dependency array
+
+                                                                  react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\contracts\GenerateContractScreen.tsx
+   21:44  error    'setFormData' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+   24:24  error    'ContractTemplate' is defined but never used                                                                      @typescript-eslint/no-unused-vars
+   27:10  error    'useLanguage' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+   42:24  error    'formData' is assigned a value but never used                                                                     @typescript-eslint/no-unused-vars
+   67:8   error    React Hook useEffect has a missing dependency: 'loadTemplates'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   83:45  warning  't' is already declared in the upper scope on line 43 column 13                                                   @typescript-eslint/no-shadow
+  429:83  warning  Inline style: { color: '#fff' }                                                                                   react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\contracts\PDFViewerScreen.tsx
+   10:5   error    'ActivityIndicator' is defined but never used
+
+
+ @typescript-eslint/no-unused-vars
+   14:5   error    'Platform' is defined but never used
+
+
+ @typescript-eslint/no-unused-vars
+  179:26  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “PDFViewerScreen” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true 
+ react/no-unstable-nested-components
+  190:8   error    React Hook React.useLayoutEffect has missing dependencies: 'Colors.foreground', 'handleShare', 'styles.headerButton', and 'styles.headerButtons'. Either include them or remove the dependency array
+
+ react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\credits\CheckoutScreen.tsx
+  271:32  warning  Inline style: { flex: 1 }                  react-native/no-inline-styles
+  369:70  warning  Inline style: { flex: 1, marginRight: 8 }  react-native/no-inline-styles
+  380:70  warning  Inline style: { flex: 1, marginLeft: 8 }   react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\credits\CreditRequestHistoryScreen.tsx
+   25:10  error    'useLanguage' is defined but never used
+
+                                                                         @typescript-eslint/no-unused-vars
+   42:12  error    'total' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u
+
+                                                                         @typescript-eslint/no-unused-vars
+  278:8   error    React Hook useCallback has a missing dependency: 'requests.length'. Either include it or remove the dependency array. You can also replace multiple useState variables with useReducer if 'setHasMore' needs the current value of 'requests.length'
+                                                                         react-hooks/exhaustive-deps
+  282:8   error    React Hook useEffect has a missing dependency: 'loadRequests'. Either include it or remove the dependency array
+
+                                                                         react-hooks/exhaustive-deps
+  341:25  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “CreditRequestHistoryScreen” and pass data as props  react/no-unstable-nested-components
+  346:53  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  347:62  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  351:55  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  360:53  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  372:66  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  384:65  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  392:51  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  400:55  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  416:8   error    React Hook useCallback has a missing dependency: 'RequestItem'. Either include it or remove the dependency array
+
+                                                                         react-hooks/exhaustive-deps
+  424:46  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+  446:54  warning  Inline style: { flexDirection: 'row' }
+
+                                                                         react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\credits\CreditRequestScreen.tsx
+   26:10  error    'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+  273:60  warning  Inline style: { flexDirection: 'row' }   react-native/no-inline-styles
+  285:68  warning  Inline style: { flexDirection: 'row' }   react-native/no-inline-styles
+  343:94  warning  Inline style: { flexDirection: 'row' }   react-native/no-inline-styles
+  360:52  warning  Inline style: { flexDirection: 'row' }   react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\credits\CreditsScreen.tsx
+   15:5   error    'Dimensions' is defined but never used                                                                       @typescript-eslint/no-unused-vars
+   22:10  error    'CreditTransaction' is defined but never used                                                                @typescript-eslint/no-unused-vars
+   24:10  error    'useLanguage' is defined but never used                                                                      @typescript-eslint/no-unused-vars
+  518:8   error    React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  583:24  warning  Inline style: { flex: 1 }                                                                                    react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\credits\TransactionHistoryScreen.tsx
+   12:5   error    'TouchableOpacity' is defined but never used
+
+                                                                       @typescript-eslint/no-unused-vars
+   14:5   error    'ActivityIndicator' is defined but never used
+
+                                                                       @typescript-eslint/no-unused-vars
+   26:10  error    'useLanguage' is defined but never used
+
+                                                                       @typescript-eslint/no-unused-vars
+   35:11  error    'navigation' is assigned a value but never used
+
+                                                                       @typescript-eslint/no-unused-vars
+  179:8   error    React Hook useEffect has a missing dependency: 'loadTransactions'. Either include it or remove the dependency array
+
+                                                                       react-hooks/exhaustive-deps
+  235:29  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “TransactionHistoryScreen” and pass data as props  react/no-unstable-nested-components
+  250:57  warning  Inline style: { flexDirection: 'row' }
+
+                                                                       react-native/no-inline-styles
+  256:63  warning  Inline style: { flexDirection: 'row' }
+
+                                                                       react-native/no-inline-styles
+  292:9   error    React Hook useCallback has a missing dependency: 'TransactionItem'. Either include it or remove the dependency array
+
+                                                                       react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\dashboard\DashboardScreen.tsx
+    1:47  error    'useCallback' is defined but never used
+
+                                                              @typescript-eslint/no-unused-vars
+   12:5   error    'FlatList' is defined but never used
+
+                                                              @typescript-eslint/no-unused-vars
+   23:10  error    'useLanguage' is defined but never used
+
+                                                              @typescript-eslint/no-unused-vars
+   25:8   error    'ScaleIn' is defined but never used
+
+                                                              @typescript-eslint/no-unused-vars
+   61:11  error    The 'conversations' conditional could make the dependencies of useMemo Hook (at line 119) change on every render. To fix this, wrap the initialization of 'conversations' in its own useMemo() Hook
+                                                              react-hooks/exhaustive-deps
+   68:8   error    React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array
+
+                                                              react-hooks/exhaustive-deps
+   89:47  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “DashboardScreen” and pass data as props  react/no-unstable-nested-components
+  103:57  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “DashboardScreen” and pass data as props  react/no-unstable-nested-components
+  120:11  error    'isLoading' is assigned a value but never used
+
+                                                              @typescript-eslint/no-unused-vars
+  128:24  warning  Inline style: { flex: 1 }
+
+                                                              react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\documents\DocumentRetrievalScreen.tsx
+   15:5   error    'ScrollView' is defined but never used
+
+                                                                      @typescript-eslint/no-unused-vars
+  241:32  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “DocumentRetrievalScreen” and pass data as props  react/no-unstable-nested-components
+  278:8   error    React Hook useCallback has a missing dependency: 'MemoizedResultItem'. Either include it or remove the dependency array      
+
+                                                                      react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\documents\DocumentSearchScreen.tsx
+  219:32  error    'setRelevanceThreshold' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u  
+
+                                                                   @typescript-eslint/no-unused-vars
+  240:32  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “DocumentSearchScreen” and pass data as props  react/no-unstable-nested-components
+  277:8   error    React Hook useCallback has a missing dependency: 'MemoizedResultItem'. Either include it or remove the dependency array      
+
+                                                                   react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\BlogScreen.tsx
+  13:5   error  'Image' is defined but never used        @typescript-eslint/no-unused-vars
+  16:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\ContactScreen.tsx
+   21:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+  149:18  error  'error' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\CookiesScreen.tsx
+  15:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\FAQScreen.tsx
+  17:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\FeaturesScreen.tsx
+  16:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\PricingScreen.tsx
+   20:10  error  'useLanguage' is defined but never used                                   @typescript-eslint/no-unused-vars
+  221:31  error  'planId' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\PrivacyScreen.tsx
+  15:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\info\TermsScreen.tsx
+  15:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\notifications\NotificationsScreen.tsx
+    6:28  error    'useState' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+    6:51  error    'useMemo' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+    6:60  error    'memo' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   23:10  error    'useLanguage' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+   25:10  error    'ActivityIndicator' is defined but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+  143:8   error    React Hook useEffect has a missing dependency: 'loadNotifications'. Either include it or remove the dependency array
+
+                                                                  react-hooks/exhaustive-deps
+  189:11  error    'renderRightActions' is assigned a value but never used
+
+                                                                  @typescript-eslint/no-unused-vars
+  251:8   error    React Hook React.useMemo has a missing dependency: 'formatDate'. Either include it or remove the dependency array
+
+                                                                  react-hooks/exhaustive-deps
+  261:30  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “NotificationsScreen” and pass data as props  react/no-unstable-nested-components
+  304:8   error    React Hook useCallback has a missing dependency: 'NotificationItem'. Either include it or remove the dependency array        
+
+                                                                  react-hooks/exhaustive-deps
+  339:68  warning  Inline style: { flexGrow: 1 }
+
+                                                                  react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\ActivityLogScreen.tsx
+    6:51  error    'useMemo' is defined but never used
+
+                                                                @typescript-eslint/no-unused-vars
+   27:10  error    'useLanguage' is defined but never used
+
+                                                                @typescript-eslint/no-unused-vars
+   36:11  error    'navigation' is assigned a value but never used
+
+                                                                @typescript-eslint/no-unused-vars
+   44:12  error    'total' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u
+
+                                                                @typescript-eslint/no-unused-vars
+   49:26  error    'setActionFilter' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u        
+
+                                                                @typescript-eslint/no-unused-vars
+   87:8   error    React Hook useCallback has a missing dependency: 'logs.length'. Either include it or remove the dependency array. You can also replace multiple useState variables with useReducer if 'setHasMore' needs the current value of 'logs.length'
+                                                                react-hooks/exhaustive-deps
+   91:8   error    React Hook useEffect has a missing dependency: 'loadLogs'. Either include it or remove the dependency array
+
+                                                                react-hooks/exhaustive-deps
+  137:29  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “ActivityLogScreen” and pass data as props  react/no-unstable-nested-components
+  146:49  warning  Inline style: { flexDirection: 'row' }
+
+                                                                react-native/no-inline-styles
+  162:49  warning  Inline style: { flexDirection: 'row' }
+
+                                                                react-native/no-inline-styles
+  163:54  warning  Inline style: { flexDirection: 'row' }
+
+                                                                react-native/no-inline-styles
+  181:8   error    React Hook useCallback has a missing dependency: 'MemoizedLogItem'. Either include it or remove the dependency array
+
+                                                                react-hooks/exhaustive-deps
+  211:55  warning  Inline style: { flexDirection: 'row' }
+
+                                                                react-native/no-inline-styles
+  495:61  warning  Inline style: { flexDirection: 'row' }
+
+                                                                react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\EditProfileScreen.tsx
+   16:5   error    'Platform' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+   36:19  error    'setEmail' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u  @typescript-eslint/no-unused-vars
+  188:32  warning  Inline style: { flex: 1 }                                                                                       react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\HelpScreen.tsx
+   19:10  error    'useLanguage' is defined but never used              @typescript-eslint/no-unused-vars
+  179:11  error    'handleLiveChat' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  249:67  warning  Inline style: { textAlign: 'left' }                  react-native/no-inline-styles
+  258:69  warning  Inline style: { textAlign: 'left' }                  react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\LoginHistoryScreen.tsx
+   12:5   error    'TouchableOpacity' is defined but never used
+
+                                                                 @typescript-eslint/no-unused-vars
+   14:5   error    'ActivityIndicator' is defined but never used
+
+                                                                 @typescript-eslint/no-unused-vars
+   20:10  error    'useLanguage' is defined but never used
+
+                                                                 @typescript-eslint/no-unused-vars
+  159:8   error    React Hook useEffect has a missing dependency: 'loadSessions'. Either include it or remove the dependency array
+
+                                                                 react-hooks/exhaustive-deps
+  217:25  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “LoginHistoryScreen” and pass data as props  react/no-unstable-nested-components
+  217:45  error    'onLogout' is defined but never used. Allowed unused args must match /^_/u
+
+                                                                 @typescript-eslint/no-unused-vars
+  246:8   error    React Hook useCallback has a missing dependency: 'SessionItem'. Either include it or remove the dependency array
+
+                                                                 react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\NotificationsSettingsScreen.tsx
+  12:5   error  'TouchableOpacity' is defined but never used  @typescript-eslint/no-unused-vars
+  18:10  error  'useLanguage' is defined but never used       @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\ProfileScreen.tsx
+    6:28  error    'useState' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+   23:10  error    'useLanguage' is defined but never used                                                                       @typescript-eslint/no-unused-vars
+   36:13  error    'contracts' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+   37:13  error    'credits' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+   38:13  error    'auditStats' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  264:8   error    React Hook useEffect has a missing dependency: 'loadStats'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  352:11  error    'isLoading' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+  358:32  warning  Inline style: { flex: 1 }                                                                                     react-native/no-inline-styles
+  397:52  error    'index' is defined but never used. Allowed unused args must match /^_/u                                       @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\SecurityScreen.tsx
+   24:10  error    'useLanguage' is defined but never used                                                                                    @typescript-eslint/no-unused-vars
+  138:12  error    'twoFactorEnabled' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u     @typescript-eslint/no-unused-vars
+  138:30  error    'setTwoFactorEnabled' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u  @typescript-eslint/no-unused-vars
+  198:32  warning  Inline style: { flex: 1 }                                                                                                  react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\profile\SettingsScreen.tsx
+   50:13  error    'user' is assigned a value but never used                                                                               @typescript-eslint/no-unused-vars
+   51:23  error    'changeLanguage' is assigned a value but never used                                                                     @typescript-eslint/no-unused-vars
+   56:12  error    'biometricEnabled' is assigned a value but never used. Allowed unused elements of array destructuring must match /^_/u  @typescript-eslint/no-unused-vars
+  221:11  error    'handleBiometricToggle' is assigned a value but never used                                                              @typescript-eslint/no-unused-vars
+  259:34  error    'error' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  284:34  error    'error' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  307:34  error    'error' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  413:30  error    'value' is defined but never used. Allowed unused args must match /^_/u                                                 @typescript-eslint/no-unused-vars
+  427:11  error    'dataStorage' is assigned a value but never used                                                                        @typescript-eslint/no-unused-vars
+  594:25  warning  Inline style: { flexDirection: 'row' }                                                                                  react-native/no-inline-styles
+  604:25  warning  Inline style: { marginRight: 12, marginLeft: 0 }                                                                        react-native/no-inline-styles
+  615:29  warning  Inline style: { textAlign: 'left' }                                                                                     react-native/no-inline-styles
+  624:33  warning  Inline style: { textAlign: 'left' }                                                                                     react-native/no-inline-styles
+  659:17  warning  Inline style: { textAlign: 'left' }                                                                                     react-native/no-inline-styles
+  668:70  warning  Inline style: { direction: 'ltr' }                                                                                      react-native/no-inline-styles
+  673:17  warning  Inline style: { right: 20 }                                                                                             react-native/no-inline-styles
+  677:32  warning  Inline style: { flex: 1 }                                                                                               react-native/no-inline-styles
+  695:29  warning  Inline style: { flexDirection: 'row' }                                                                                  react-native/no-inline-styles
+  703:29  warning  Inline style: { marginLeft: 12, marginRight: 0 }                                                                        react-native/no-inline-styles
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\states\ErrorScreen.tsx
+  9:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\states\MaintenanceScreen.tsx
+  9:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\states\NoInternetScreen.tsx
+  9:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\states\NotFoundScreen.tsx
+  10:10  error  'useLanguage' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\statistics\InteractionHistoryScreen.tsx
+   20:10  error    'useLanguage' is defined but never used
+
+                                                                       @typescript-eslint/no-unused-vars
+  178:8   error    React Hook useEffect has a missing dependency: 'loadInteractions'. Either include it or remove the dependency array
+
+                                                                       react-hooks/exhaustive-deps
+  232:37  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s 
+DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “InteractionHistoryScreen” and pass data as props  react/no-unstable-nested-components
+  276:8   error    React Hook useCallback has a missing dependency: 'MemoizedInteractionItem'. Either include it or remove the dependency array 
+
+                                                                       react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\screens\statistics\StatisticsScreen.tsx
+   13:5   error  'ActivityIndicator' is defined but never used
+                                                     @typescript-eslint/no-unused-vars
+   28:10  error  'useLanguage' is defined but never used
+                                                     @typescript-eslint/no-unused-vars
+   33:38  error  'SCREEN_HEIGHT' is assigned a value but never used
+                                                     @typescript-eslint/no-unused-vars
+  438:8   error  React Hook useEffect has missing dependencies: 'delay', 'iconScaleAnim', 'numberAnim', 'opacityAnim', 'scaleAnim', and 'value'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  840:8   error  React Hook useEffect has missing dependencies: 'fadeAnim', 'loadStatistics', and 'slideAnim'. Either include them or remove the dependency array                                    react-hooks/exhaustive-deps
+  856:8   error  React Hook useEffect has a missing dependency: 'progressAnim'. Either include it or remove the dependency array
+                                                     react-hooks/exhaustive-deps
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\services\payment.service.ts
+    8:10  error  'initStripe' is defined but never used                                               @typescript-eslint/no-unused-vars
+    8:22  error  'useStripe' is defined but never used                                                @typescript-eslint/no-unused-vars
+    8:33  error  'useApplePay' is defined but never used                                              @typescript-eslint/no-unused-vars
+   77:9   error  'clientSecret' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+   78:9   error  'cardDetails' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  121:9   error  'currency' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  166:9   error  'phoneNumber' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  167:9   error  'amount' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  193:9   error  'paymentIntentId' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  194:9   error  'paymentMethodId' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  209:30  error  Unreachable code                                                                     no-unreachable
+  226:18  error  'error' is defined but never used                                                    @typescript-eslint/no-unused-vars
+  226:25  error  Unreachable code                                                                     no-unreachable
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\store\hooks.ts
+  7:10  error  'useMemo' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\store\slices\authSlice.ts
+    8:51  error  'getUserData' is defined but never used                                            @typescript-eslint/no-unused-vars
+  109:17  error  'rejectWithValue' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  112:18  error  'error' is defined but never used                                                  @typescript-eslint/no-unused-vars
+  144:76  error  'dispatch' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\store\slices\contractsSlice.ts
+  6:36  error  'ContractTemplate' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app\src\utils\animations.ts
+  165:11  warning  'shake' is already declared in the upper scope on line 160 column 14  @typescript-eslint/no-shadow
+
+✖ 315 problems (199 errors, 116 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+PS C:\Users\Mr Ali Raza Mustafai\Documents\GitHub\namos_app> 

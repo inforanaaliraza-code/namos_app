@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import { Linking, View, StyleSheet } from 'react-native';
 import { NavigationContainer, LinkingOptions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { useAppDispatch } from '../store/hooks';
 import { autoLogin } from '../store/slices/authSlice';
 import AuthNavigator from './AuthNavigator';
 import AppNavigator from './AppNavigator';

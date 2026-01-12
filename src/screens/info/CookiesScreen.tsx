@@ -12,7 +12,6 @@ import {
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 const CookiesScreen: React.FC = () => {
     const Colors = useColors();

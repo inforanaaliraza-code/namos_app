@@ -12,7 +12,6 @@ import {
     TouchableOpacity,
     FlatList,
     ActivityIndicator,
-    ScrollView,
 } from 'react-native';
 import { chatAPI } from '../../api/chat.api';
 import { useColors } from '../../hooks/useColors';
@@ -275,7 +274,7 @@ const DocumentRetrievalScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <MemoizedResultItem item={item} />
         </AnimatedListItem>
-    ), [navigation, Colors]);
+    ), [MemoizedResultItem]);
 
     return (
         <View style={styles.container}>

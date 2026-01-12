@@ -76,13 +76,13 @@ export const creditsAPI = {
     },
 
     // Create payment intent
-    createPaymentIntent: async (planId: string): Promise<PaymentIntent> => {
+    createPaymentIntent: async (_planId: string): Promise<PaymentIntent> => {
         // TODO: Backend doesn't have this endpoint yet
         throw new Error('Payment endpoints not implemented in backend yet');
     },
 
     // Confirm payment
-    confirmPayment: async (intentId: string, paymentMethodId?: string): Promise<{ success: boolean; credits: number }> => {
+    confirmPayment: async (_intentId: string, _paymentMethodId?: string): Promise<{ success: boolean; credits: number }> => {
         // TODO: Backend doesn't have this endpoint yet
         throw new Error('Payment endpoints not implemented in backend yet');
     },
@@ -94,7 +94,7 @@ export const creditsAPI = {
     },
 
     // Add payment method
-    addPaymentMethod: async (data: {
+    addPaymentMethod: async (_data: {
         type: 'card' | 'apple_pay' | 'stc_pay';
         cardNumber?: string;
         expiryMonth?: number;
@@ -107,7 +107,7 @@ export const creditsAPI = {
     },
 
     // Delete payment method
-    deletePaymentMethod: async (methodId: string): Promise<void> => {
+    deletePaymentMethod: async (_methodId: string): Promise<void> => {
         // TODO: Backend doesn't have this endpoint yet
         throw new Error('Payment endpoints not implemented in backend yet');
     },

@@ -4,13 +4,11 @@
  */
 
 import { useMemo } from 'react';
-import { I18nManager } from 'react-native';
 import { useLanguage } from '../contexts/LanguageContext';
 import {
     getTextAlign,
     getOppositeTextAlign,
     getFlexDirection,
-    getWritingDirection,
     rtlIcon,
     rtlStyle
 } from '../utils/rtl';

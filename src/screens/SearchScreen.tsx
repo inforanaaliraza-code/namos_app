@@ -11,7 +11,6 @@ import {
     TextInput,
     FlatList,
     TouchableOpacity,
-    ActivityIndicator,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -21,7 +20,6 @@ import { useAppDispatch } from '../store/hooks';
 import { getContract } from '../store/slices/contractsSlice';
 import { chatAPI } from '../api/chat.api';
 import { useColors } from '../hooks/useColors';
-import { useLanguage } from '../contexts/LanguageContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AppStackParamList } from '../navigation/types';
 import LoadingOverlay from '../components/LoadingOverlay';
@@ -416,7 +414,7 @@ const SearchScreen: React.FC = () => {
 
     const renderResult = useCallback(({ item }: { item: SearchResult }) => (
         <MemoizedResultItem item={item} />
-    ), [navigation, dispatch, Colors]);
+    ), [MemoizedResultItem]);
 
     return (
         <View style={styles.container}>

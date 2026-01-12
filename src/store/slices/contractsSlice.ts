@@ -3,7 +3,7 @@
  */
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ContractsState, Contract, ContractTemplate, GenerateContractRequest } from '../../types/contracts.types';
+import { ContractsState, Contract, GenerateContractRequest } from '../../types/contracts.types';
 import { contractsAPI } from '../../api/contracts.api';
 import { normalizeAxiosError } from '../../utils/errors';
 

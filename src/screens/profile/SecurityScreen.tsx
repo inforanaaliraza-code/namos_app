@@ -21,7 +21,6 @@ import { changePassword } from '../../store/slices/authSlice';
 import { isBiometricEnabled, setBiometricEnabled } from '../../utils/storage';
 import { checkBiometricAvailability, getBiometricTypeName } from '../../utils/biometric';
 import useColors from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
 // Temporarily disabled for stability
@@ -135,7 +134,7 @@ const SecurityScreen: React.FC = () => {
     });
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
-    const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+    const [, _setTwoFactorEnabled] = useState(false);
     const [biometricEnabled, setBiometricEnabledState] = useState(false);
     const [biometricAvailable, setBiometricAvailable] = useState(false);
     const [biometricType, setBiometricType] = useState<string>('');

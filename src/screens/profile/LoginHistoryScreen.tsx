@@ -9,15 +9,12 @@ import {
     Text,
     StyleSheet,
     FlatList,
-    TouchableOpacity,
     Alert,
-    ActivityIndicator,
 } from 'react-native';
 import { authAPI } from '../../api/auth.api';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
@@ -154,11 +151,7 @@ const LoginHistoryScreen: React.FC = () => {
         },
     });
 
-    useEffect(() => {
-        loadSessions();
-    }, []);
-
-    const loadSessions = async () => {
+    const loadSessions = useCallback(async () => {
         setIsLoading(true);
         try {
             const response = await authAPI.getActiveSessions();
@@ -183,7 +176,11 @@ const LoginHistoryScreen: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [t]);
+
+    useEffect(() => {
+        loadSessions();
+    }, [loadSessions]);
 
     const getDeviceIcon = (deviceType: string) => {
         switch (deviceType.toLowerCase()) {
@@ -214,7 +211,7 @@ const LoginHistoryScreen: React.FC = () => {
     };
 
     // Memoized session item component for performance
-    const SessionItem = React.memo(({ item, onLogout }: { item: LoginSession; onLogout: (id: string) => void }) => (
+    const SessionItem = React.memo(({ item, onLogout: _onLogout }: { item: LoginSession; onLogout: (id: string) => void }) => (
         <View style={styles.sessionCard}>
             <View style={styles.sessionHeader}>
                 <View style={styles.sessionIcon}>
@@ -243,7 +240,7 @@ const LoginHistoryScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <SessionItem item={item} onLogout={() => { }} />
         </AnimatedListItem>
-    ), []);
+    ), [SessionItem]);
 
     return (
         <View style={styles.container}>

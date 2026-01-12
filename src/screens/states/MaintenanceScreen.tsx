@@ -6,7 +6,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useColors } from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FadeInView from '../../components/FadeInView';
 

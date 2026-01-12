@@ -17,7 +17,7 @@ interface ListSkeletonLoaderProps {
 
 const ListSkeletonLoader: React.FC<ListSkeletonLoaderProps> = ({
     count = 5,
-    itemHeight = 80,
+    itemHeight: _itemHeight = 80,
     showAvatar = false,
     showSubtitle = true,
 }) => {

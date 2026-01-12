@@ -9,30 +9,21 @@ import {
     Text,
     StyleSheet,
     FlatList,
-    TouchableOpacity,
     RefreshControl,
-    ActivityIndicator,
     Alert,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AppStackParamList } from '../../navigation/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchCreditHistory } from '../../store/slices/creditsSlice';
 import { CreditTransaction } from '../../types/credits.types';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
 
-type TransactionHistoryScreenNavigationProp = StackNavigationProp<AppStackParamList, 'TransactionHistory'>;
-
 const TransactionHistoryScreen: React.FC = () => {
     const Colors = useColors();
-    const navigation = useNavigation<TransactionHistoryScreenNavigationProp>();
     const dispatch = useAppDispatch();
     const { transactions, isLoading } = useAppSelector((state) => state.credits);
     const { t } = useTranslation();
@@ -176,7 +167,7 @@ const TransactionHistoryScreen: React.FC = () => {
 
     useEffect(() => {
         loadTransactions(false);
-    }, []);
+    }, [loadTransactions]);
 
     const onRefresh = () => {
         loadTransactions(true);
@@ -289,7 +280,7 @@ const TransactionHistoryScreen: React.FC = () => {
                 <TransactionItem item={item} />
             </AnimatedListItem>
         ),
-        [Colors, t]
+        [TransactionItem]
     );
 
     const renderEmpty = () => (

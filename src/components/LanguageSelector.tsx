@@ -10,7 +10,6 @@ import {
     TouchableOpacity,
     StyleSheet,
     Modal,
-    I18nManager,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useLanguage } from '../contexts/LanguageContext';

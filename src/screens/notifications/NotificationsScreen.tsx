@@ -3,7 +3,7 @@
  * Display all notifications grouped by date
  */
 
-import React, { useEffect, useState, useCallback, useMemo, memo } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -20,9 +20,7 @@ import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Notification } from '../../types/notifications.types';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import ListSkeletonLoader from '../../components/ListSkeletonLoader';
-import { ActivityIndicator } from 'react-native';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
 
 const NotificationsScreen: React.FC = () => {
@@ -138,11 +136,7 @@ const NotificationsScreen: React.FC = () => {
     );
     const { t } = useTranslation();
 
-    useEffect(() => {
-        loadNotifications();
-    }, []);
-
-    const loadNotifications = async () => {
+    const loadNotifications = useCallback(async () => {
         try {
             await dispatch(fetchNotifications()).unwrap();
         } catch (error: any) {
@@ -159,41 +153,37 @@ const NotificationsScreen: React.FC = () => {
                 console.warn('[NotificationsScreen] Failed to load notifications:', errorMessage);
             }
         }
-    };
+    }, [dispatch]);
 
-    const handleMarkAsRead = async (id: string) => {
+    useEffect(() => {
+        loadNotifications();
+    }, [loadNotifications]);
+
+    const handleMarkAsRead = useCallback(async (id: string) => {
         try {
             await dispatch(markAsRead(id)).unwrap();
         } catch (error) {
             console.error('Error marking notification as read:', error);
         }
-    };
+    }, [dispatch]);
 
-    const handleMarkAllAsRead = async () => {
+    const handleMarkAllAsRead = useCallback(async () => {
         try {
             await dispatch(markAllAsRead()).unwrap();
         } catch (error) {
             console.error('Error marking all as read:', error);
         }
-    };
+    }, [dispatch]);
 
-    const handleDeleteNotification = async (id: string) => {
+    const handleDeleteNotification = useCallback(async (id: string) => {
         try {
             await dispatch(deleteNotification(id)).unwrap();
         } catch (error) {
             console.error('Error deleting notification:', error);
             Alert.alert(t('common.error'), t('notifications.failedToDelete', { defaultValue: 'Failed to delete notification' }));
         }
-    };
+    }, [dispatch, t]);
 
-    const renderRightActions = (notification: Notification) => (
-        <TouchableOpacity
-            style={styles.deleteAction}
-            onPress={() => handleDeleteNotification(notification.id)}
-        >
-            <Icon name="delete" size={20} color="#fff" />
-        </TouchableOpacity>
-    );
 
     const formatDate = React.useCallback((dateString: string) => {
         const date = new Date(dateString);
@@ -248,7 +238,7 @@ const NotificationsScreen: React.FC = () => {
             acc[date].push(notification);
             return acc;
         }, {} as Record<string, Notification[]>);
-    }, [notifications]);
+    }, [notifications, formatDate]);
 
     const sections = React.useMemo(() => {
         return Object.keys(groupedNotifications).map((date) => ({
@@ -301,7 +291,7 @@ const NotificationsScreen: React.FC = () => {
 
     const renderNotification = useCallback(({ item }: { item: Notification }) => (
         <NotificationItem item={item} onMarkAsRead={handleMarkAsRead} onDelete={handleDeleteNotification} />
-    ), [handleMarkAsRead, handleDeleteNotification]);
+    ), [handleMarkAsRead, handleDeleteNotification, NotificationItem]);
 
     const renderSectionHeader = ({ section }: { section: { title: string } }) => (
         <View style={styles.sectionHeader}>

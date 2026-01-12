@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -17,7 +17,6 @@ import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { API_CONFIG } from '../../config/api.config';
 import { useColors } from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslation } from 'react-i18next';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
@@ -253,24 +252,9 @@ const ResetPasswordScreen: React.FC = () => {
         );
 
         return () => backHandler.remove();
-    }, []);
+    }, [navigation]);
 
-    useEffect(() => {
-        if (!token) {
-            Toast.show({
-                type: 'error',
-                text1: t('auth.invalidLink', { defaultValue: 'Invalid Link' }),
-                text2: t('auth.noResetToken', { defaultValue: 'No reset token provided' }),
-            });
-            navigation.navigate('ForgotPassword' as never);
-            return;
-        }
-
-        // Validate token on mount
-        validateToken();
-    }, [token]);
-
-    const validateToken = async () => {
+    const validateToken = useCallback(async () => {
         try {
             const response = await axios.post(
                 `${API_CONFIG.baseURL}/auth/validate-reset-token`,
@@ -287,7 +271,22 @@ const ResetPasswordScreen: React.FC = () => {
             console.error('Token validation error:', error);
             setTokenValid(false);
         }
-    };
+    }, [token]);
+
+    useEffect(() => {
+        if (!token) {
+            Toast.show({
+                type: 'error',
+                text1: t('auth.invalidLink', { defaultValue: 'Invalid Link' }),
+                text2: t('auth.noResetToken', { defaultValue: 'No reset token provided' }),
+            });
+            navigation.navigate('ForgotPassword' as never);
+            return;
+        }
+
+        // Validate token on mount
+        validateToken();
+    }, [token, navigation, t, validateToken]);
 
     const validateForm = () => {
         const errors: Record<string, string> = {};

@@ -6,7 +6,7 @@
 export const API_CONFIG = {
     // NestJS Backend
     baseURL: __DEV__
-        ? 'http://192.168.1.13:3001/api'
+        ? 'http://192.168.100.8:3001/api'
         : 'https://api.namos-legal.com/api',
     // Python FastAPI Backend
     pythonBaseURL: __DEV__

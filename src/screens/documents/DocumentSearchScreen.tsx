@@ -216,7 +216,7 @@ const DocumentSearchScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [topK, setTopK] = useState(5);
     const [language, setLanguage] = useState<'ar' | 'en' | 'both'>('both');
-    const [relevanceThreshold, setRelevanceThreshold] = useState(0.5);
+    const [relevanceThreshold] = useState(0.5);
 
     const handleSearch = async () => {
         if (!query.trim()) return;
@@ -274,7 +274,7 @@ const DocumentSearchScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <MemoizedResultItem item={item} />
         </AnimatedListItem>
-    ), [navigation, Colors]);
+    ), [MemoizedResultItem]);
 
     return (
         <View style={styles.container}>

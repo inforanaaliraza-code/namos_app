@@ -8,7 +8,6 @@ import {
     TextInput,
     RefreshControl,
     Alert,
-    ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -20,7 +19,6 @@ import { Conversation } from '../../types/chat.types';
 import { Swipeable } from 'react-native-gesture-handler';
 import { AppStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useDebounce } from '../../utils/debounce';
 import ListSkeletonLoader from '../../components/ListSkeletonLoader';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
@@ -31,7 +29,7 @@ const ConversationsScreen: React.FC = () => {
     const navigation = useNavigation<ConversationsScreenNavigationProp>();
     const dispatch = useAppDispatch();
     const { conversations, isLoading } = useAppSelector((state) => state.chat);
-    const { accessToken, isAuthenticated } = useAppSelector((state) => state.auth);
+    const { accessToken } = useAppSelector((state) => state.auth);
     const { t } = useTranslation();
 
     const Colors = useColors();
@@ -328,7 +326,7 @@ const ConversationsScreen: React.FC = () => {
                 </TouchableOpacity>
             </View>
         );
-    }, [handleArchive, handleDelete, t]);
+    }, [handleArchive, handleDelete, t, styles.archiveAction, styles.deleteAction, styles.swipeActionText, styles.swipeActionsContainer]);
 
     const renderLeftActions = useCallback((id: string, isArchived: boolean) => {
         if (isArchived) {
@@ -346,7 +344,7 @@ const ConversationsScreen: React.FC = () => {
             );
         }
         return null;
-    }, [dispatch, t]);
+    }, [dispatch, t, styles.swipeActionText, styles.unarchiveAction]);
 
     const ConversationItem = memo(({ item }: { item: Conversation }) => (
         <Swipeable
@@ -397,7 +395,7 @@ const ConversationsScreen: React.FC = () => {
                 <ConversationItem item={item} />
             </AnimatedListItem>
         ),
-        []
+        [ConversationItem]
     );
 
     return (

@@ -4,7 +4,6 @@
  */
 
 import { TypedUseSelectorHook, useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useMemo } from 'react';
 import type { RootState, AppDispatch } from './index';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`

@@ -162,7 +162,7 @@ export const shake = (
     distance: number = 10,
     duration: number = 500
 ): Animated.CompositeAnimation => {
-    const shake = Animated.sequence([
+    const shakeAnimation = Animated.sequence([
         Animated.timing(value, {
             toValue: -distance,
             duration: duration / 5,
@@ -190,6 +190,6 @@ export const shake = (
         }),
     ]);
     
-    return shake;
+    return shakeAnimation;
 };
 

@@ -17,15 +17,14 @@ import {
     ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { logoutUser } from '../../store/slices/authSlice';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { checkBiometricAvailability, getBiometricTypeName } from '../../utils/biometric';
-import { isBiometricEnabled, setBiometricEnabled } from '../../utils/storage';
+import { isBiometricEnabled } from '../../utils/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import PressableScale from '../../components/animations/PressableScale';
@@ -47,19 +46,18 @@ interface SettingItem {
 const SettingsScreen: React.FC = () => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
-    const { user } = useAppSelector((state) => state.auth);
-    const { language, changeLanguage } = useLanguage();
+    const { language } = useLanguage();
     const { isDark, toggleTheme } = useTheme();
     const { t } = useTranslation();
     const Colors = useColors();
 
-    const [biometricEnabled, setBiometricEnabledState] = useState(false);
-    const [biometricAvailable, setBiometricAvailable] = useState(false);
-    const [biometricType, setBiometricType] = useState<string>('');
+    const [, setBiometricEnabledState] = useState(false);
+    const [, setBiometricAvailable] = useState(false);
+    const [, setBiometricType] = useState<string>('');
     const [debugMode, setDebugMode] = useState(__DEV__);
     const [appVersion, setAppVersion] = useState('');
     const [buildNumber, setBuildNumber] = useState('');
-    const [isClearingCache, setIsClearingCache] = useState(false);
+    const [isClearingCache] = useState(false);
 
     const styles = useMemo(() => StyleSheet.create({
         container: {
@@ -197,8 +195,8 @@ const SettingsScreen: React.FC = () => {
             const build = '1'; // Can be replaced with actual build number
             setAppVersion(version);
             setBuildNumber(build);
-        } catch (error) {
-            console.error('[SettingsScreen] Error loading app info:', error);
+        } catch {
+            // Error logged, continue
         }
     };
 
@@ -213,81 +211,9 @@ const SettingsScreen: React.FC = () => {
                 const enabled = await isBiometricEnabled();
                 setBiometricEnabledState(enabled);
             }
-        } catch (error) {
-            console.error('[SettingsScreen] Error checking biometric:', error);
+        } catch {
+            // Error logged, continue
         }
-    };
-
-    const handleBiometricToggle = async (value: boolean) => {
-        if (!biometricAvailable) {
-            Alert.alert(
-                t('common.error'),
-                t('profile.biometricNotAvailable')
-            );
-            return;
-        }
-
-        try {
-            await setBiometricEnabled(value);
-            setBiometricEnabledState(value);
-            Alert.alert(
-                t('common.success'),
-                value
-                    ? t('profile.biometricEnabled', { type: biometricType })
-                    : t('profile.biometricDisabled')
-            );
-        } catch (error: any) {
-            Alert.alert(t('common.error'), error || t('profile.failedToUpdateBiometric'));
-        }
-    };
-
-    const handleClearCache = () => {
-        Alert.alert(
-            t('profile.clearCache'),
-            t('profile.clearCacheConfirm'),
-            [
-                { text: t('common.cancel'), style: 'cancel' },
-                {
-                    text: t('common.confirm'),
-                    style: 'destructive',
-                    onPress: async () => {
-                        setIsClearingCache(true);
-                        try {
-                            // Clear cache logic here
-                            await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-                            Alert.alert(t('common.success'), t('profile.cacheCleared'));
-                        } catch (error) {
-                            Alert.alert(t('common.error'), t('common.error'));
-                        } finally {
-                            setIsClearingCache(false);
-                        }
-                    },
-                },
-            ]
-        );
-    };
-
-    const handleDeleteAllData = () => {
-        Alert.alert(
-            t('profile.deleteAllData'),
-            t('profile.deleteAllDataConfirm'),
-            [
-                { text: t('common.cancel'), style: 'cancel' },
-                {
-                    text: t('common.delete'),
-                    style: 'destructive',
-                    onPress: async () => {
-                        try {
-                            // Clear all AsyncStorage data except essential items
-                            await AsyncStorage.clear();
-                            Alert.alert(t('common.success'), t('profile.dataDeleted'));
-                        } catch (error) {
-                            Alert.alert(t('common.error'), t('common.error'));
-                        }
-                    },
-                },
-            ]
-        );
     };
 
     const handleResetApp = () => {
@@ -304,7 +230,7 @@ const SettingsScreen: React.FC = () => {
                             // Clear all AsyncStorage data
                             await AsyncStorage.clear();
                             Alert.alert(t('common.success'), t('profile.appReset'));
-                        } catch (error) {
+                        } catch {
                             Alert.alert(t('common.error'), t('common.error'));
                         }
                     },
@@ -410,7 +336,7 @@ const SettingsScreen: React.FC = () => {
             icon: isDark ? 'weather-night' : 'weather-sunny',
             type: 'toggle',
             value: isDark,
-            onToggle: async (value) => {
+            onToggle: async () => {
                 await toggleTheme();
             },
         },
@@ -424,36 +350,6 @@ const SettingsScreen: React.FC = () => {
         },
     ];
 
-    const dataStorage: SettingItem[] = [
-        {
-            id: 'clearCache',
-            title: t('profile.clearCache'),
-            description: t('profile.clearCacheDescription', { defaultValue: 'Free up storage space' }),
-            icon: 'broom',
-            type: 'action',
-            onPress: handleClearCache,
-            disabled: isClearingCache,
-        },
-        {
-            id: 'exportData',
-            title: t('profile.exportData'),
-            description: t('profile.exportDataDescription'),
-            icon: 'download',
-            type: 'action',
-            onPress: () => {
-                Alert.alert(t('profile.exportData'), t('profile.exportDataDescription'));
-            },
-        },
-        {
-            id: 'deleteAllData',
-            title: t('profile.deleteAllData'),
-            description: t('profile.deleteAllDataWarning', { defaultValue: 'Permanently delete all local data' }),
-            icon: 'delete-sweep',
-            type: 'action',
-            onPress: handleDeleteAllData,
-            danger: true,
-        },
-    ];
 
     const aboutHelp: SettingItem[] = [
         {

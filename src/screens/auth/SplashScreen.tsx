@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { View, Text, StyleSheet, Animated, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppDispatch } from '../../store/hooks';
 import { autoLogin } from '../../store/slices/authSlice';
 import { useColors } from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { APP_NAME, APP_TAGLINE, APP_DESCRIPTION } from '../../constants/app';
 
 const SplashScreen: React.FC = () => {
@@ -13,29 +12,10 @@ const SplashScreen: React.FC = () => {
     const dispatch = useAppDispatch();
     const Colors = useColors();
 
-    const fadeAnim = new Animated.Value(0);
-    const scaleAnim = new Animated.Value(0.5);
+    const fadeAnim = useMemo(() => new Animated.Value(0), []);
+    const scaleAnim = useMemo(() => new Animated.Value(0.5), []);
 
-    useEffect(() => {
-        // Animations
-        Animated.parallel([
-            Animated.timing(fadeAnim, {
-                toValue: 1,
-                duration: 1000,
-                useNativeDriver: true,
-            }),
-            Animated.spring(scaleAnim, {
-                toValue: 1,
-                friction: 4,
-                useNativeDriver: true,
-            }),
-        ]).start();
-
-        // Auto-login check
-        checkAutoLogin();
-    }, []);
-
-    const checkAutoLogin = async () => {
+    const checkAutoLogin = useCallback(async () => {
         try {
             // Wait for animation to complete
             await new Promise<void>((resolve) => setTimeout(resolve, 2000));
@@ -56,13 +36,34 @@ const SplashScreen: React.FC = () => {
                 console.log('Auto-login successful');
                 // Navigation handled by RootNavigator
             }
-        } catch (error) {
+        } catch {
             // Auto-login failed - navigate to login after 1 second
             setTimeout(() => {
                 navigation.navigate('Login' as never);
             }, 1000);
         }
-    };
+    }, [navigation, dispatch]);
+
+    useEffect(() => {
+        // Start animations
+        Animated.parallel([
+            Animated.timing(fadeAnim, {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: true,
+            }),
+            Animated.spring(scaleAnim, {
+                toValue: 1,
+                tension: 50,
+                friction: 7,
+                useNativeDriver: true,
+            }),
+        ]).start();
+
+        // Check auto-login after animations
+        checkAutoLogin();
+    }, [fadeAnim, scaleAnim, checkAutoLogin]);
+
     const styles = StyleSheet.create({
         container: {
             flex: 1,

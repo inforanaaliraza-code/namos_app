@@ -3,7 +3,7 @@
  * Displays all user contracts with filtering and search
  */
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     View,
     Text,
@@ -14,7 +14,6 @@ import {
     RefreshControl,
     Alert,
     Modal,
-    ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -23,7 +22,6 @@ import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Contract } from '../../types/contracts.types';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useDebounce } from '../../utils/debounce';
 import CardSkeletonLoader from '../../components/CardSkeletonLoader';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
@@ -50,9 +48,9 @@ const ContractsListScreen: React.FC = () => {
 
     useEffect(() => {
         loadContracts();
-    }, []);
+    }, [loadContracts]);
 
-    const loadContracts = async () => {
+    const loadContracts = useCallback(async () => {
         try {
             await dispatch(
                 fetchContracts({
@@ -63,7 +61,7 @@ const ContractsListScreen: React.FC = () => {
         } catch (error) {
             console.error('Error loading contracts:', error);
         }
-    };
+    }, [dispatch, filterType, filterStatus]);
 
     const handleDelete = (contract: Contract) => {
         Alert.alert(
@@ -87,10 +85,10 @@ const ContractsListScreen: React.FC = () => {
         );
     };
 
-    const handleView = (contract: Contract) => {
+    const handleView = useCallback((contract: Contract) => {
         dispatch(setCurrentContract(contract));
         (navigation as any).navigate('PDFViewer', { contractId: contract.id });
-    };
+    }, [dispatch, navigation]);
 
     const handleDownload = async (contract: Contract) => {
         if (!contract.pdfUrl) {
@@ -102,7 +100,7 @@ const ContractsListScreen: React.FC = () => {
             // Navigate to PDF viewer where download can be done
             dispatch(setCurrentContract(contract));
             (navigation as any).navigate('PDFViewer', { contractId: contract.id });
-        } catch (error) {
+        } catch {
             Alert.alert(t('common.error'), t('contracts.failedToOpenPDF'));
         }
     };
@@ -250,7 +248,7 @@ const ContractsListScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={40}>
             <ContractItem item={item} onView={handleView} onMenu={handleMenuPress} />
         </AnimatedListItem>
-    ), [handleView, handleMenuPress]);
+    ), [handleView, handleMenuPress, ContractItem]);
     const styles = StyleSheet.create({
         container: {
             flex: 1,

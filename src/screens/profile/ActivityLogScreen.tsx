@@ -3,7 +3,7 @@
  * Display user's activity/audit logs
  */
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     View,
     Text,
@@ -16,24 +16,17 @@ import {
     Modal,
     ScrollView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AppStackParamList } from '../../navigation/types';
 import { auditAPI } from '../../api/audit.api';
 import { UserAuditLog } from '../../types/audit.types';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import AnimatedListItem from '../../components/animations/AnimatedListItem';
 
-type ActivityLogScreenNavigationProp = StackNavigationProp<AppStackParamList, 'ActivityLog'>;
-
 const ActivityLogScreen: React.FC = () => {
     const Colors = useColors();
-    const navigation = useNavigation<ActivityLogScreenNavigationProp>();
     const { t } = useTranslation();
 
 
@@ -41,12 +34,12 @@ const ActivityLogScreen: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(0);
+    const [, setTotal] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [selectedLog, setSelectedLog] = useState<UserAuditLog | null>(null);
     const [detailModalVisible, setDetailModalVisible] = useState(false);
     const [entityTypeFilter, setEntityTypeFilter] = useState<string>('all');
-    const [actionFilter, setActionFilter] = useState<string>('all');
+    const [actionFilter] = useState<string>('all');
     const limit = 20;
 
     const loadLogs = useCallback(async (pageNum: number = 1, isRefresh: boolean = false) => {
@@ -84,11 +77,11 @@ const ActivityLogScreen: React.FC = () => {
             setLoading(false);
             setRefreshing(false);
         }
-    }, [t, limit, entityTypeFilter, actionFilter]);
+    }, [t, limit, entityTypeFilter, actionFilter, logs.length]);
 
     useEffect(() => {
         loadLogs(1, false);
-    }, [entityTypeFilter, actionFilter]);
+    }, [entityTypeFilter, actionFilter, loadLogs]);
 
     const onRefresh = () => {
         setPage(1);
@@ -178,7 +171,7 @@ const ActivityLogScreen: React.FC = () => {
         <AnimatedListItem index={index} delay={30}>
             <MemoizedLogItem item={item} />
         </AnimatedListItem>
-    ), []);
+    ), [MemoizedLogItem]);
 
     const renderEmpty = () => (
         <View style={styles.emptyContainer}>

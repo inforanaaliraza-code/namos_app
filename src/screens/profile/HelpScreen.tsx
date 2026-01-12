@@ -16,7 +16,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 interface FAQItem {
     id: string;
@@ -176,10 +175,6 @@ const HelpScreen: React.FC = () => {
         Linking.openURL('tel:+966123456789');
     };
 
-    const handleLiveChat = () => {
-        // TODO: Navigate to live chat
-        console.log('Open live chat');
-    };
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.content}>

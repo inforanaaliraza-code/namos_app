@@ -13,14 +13,12 @@ import {
     TouchableOpacity,
     Alert,
     ActivityIndicator,
-    Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { updateProfile } from '../../store/slices/authSlice';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslation } from 'react-i18next';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
@@ -33,7 +31,7 @@ const EditProfileScreen: React.FC = () => {
     const { t } = useTranslation();
 
     const [fullName, setFullName] = useState(user?.fullName || '');
-    const [email, setEmail] = useState(user?.email || '');
+    const [email] = useState(user?.email || '');
     const [phone, setPhone] = useState(user?.phone || '');
     const [isSaving, setIsSaving] = useState(false);
 

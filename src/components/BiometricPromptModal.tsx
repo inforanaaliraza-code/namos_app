@@ -18,7 +18,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useColors } from '../hooks/useColors';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 interface BiometricPromptModalProps {
     visible: boolean;
@@ -30,7 +30,7 @@ interface BiometricPromptModalProps {
 
 const BiometricPromptModal: React.FC<BiometricPromptModalProps> = ({
     visible,
-    biometricType,
+    biometricType: _biometricType,
     onConfirm,
     onCancel,
     onUseCredentials,
@@ -141,7 +141,8 @@ const BiometricPromptModal: React.FC<BiometricPromptModalProps> = ({
                 clearTimeout(confirmTimeout);
             };
         }
-    }, [visible]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, onConfirm]);
 
     // Scanning line position
     const scanLineTranslateY = scanLineAnim.interpolate({

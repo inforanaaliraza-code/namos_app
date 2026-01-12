@@ -3,7 +3,7 @@
  * Display credit balance, usage chart, pricing plans, and transaction history
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     View,
     Text,
@@ -12,16 +12,13 @@ import {
     TouchableOpacity,
     RefreshControl,
     ActivityIndicator,
-    Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchCredits, fetchCreditHistory } from '../../store/slices/creditsSlice';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { CreditTransaction } from '../../types/credits.types';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 // Victory-native components - using simple custom chart instead
 // import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryContainer } from 'victory-native';
@@ -515,9 +512,9 @@ const CreditsScreen: React.FC = () => {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [loadData]);
 
-    const loadData = async () => {
+    const loadData = useCallback(async () => {
         try {
             await Promise.all([
                 dispatch(fetchCredits()).unwrap(),
@@ -526,7 +523,7 @@ const CreditsScreen: React.FC = () => {
         } catch (error) {
             console.error('Error loading credits data:', error);
         }
-    };
+    }, [dispatch]);
 
     const onRefresh = async () => {
         setRefreshing(true);

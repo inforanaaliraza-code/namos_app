@@ -24,14 +24,6 @@ import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import { globalRTLStyles, getRTLMargin } from '../../styles/globalRTL';
 import { useRTL } from '../../hooks/useRTL';
-import {
-    checkBiometricAvailability,
-    getBiometricTypeName,
-} from '../../utils/biometric';
-import {
-    isBiometricEnabled,
-    setBiometricEnabled,
-} from '../../utils/storage';
 
 const RegisterScreen: React.FC = () => {
     const navigation = useNavigation();
@@ -70,7 +62,7 @@ const RegisterScreen: React.FC = () => {
                 position: 'top',
             });
         }
-    }, [error]);
+    }, [error, t]);
 
     const validateForm = () => {
         const errors: Record<string, string> = {};
@@ -161,7 +153,7 @@ const RegisterScreen: React.FC = () => {
             });
 
             (navigation.navigate as any)('VerifyEmail', { email: formData.emailOrPhone });
-        } catch (err) {
+        } catch {
             // Error handled by useEffect
         }
     };
@@ -223,8 +215,8 @@ const RegisterScreen: React.FC = () => {
         if (language !== formData.language) {
             setFormData(prev => ({ ...prev, language }));
         }
-    }, [language]);
-    const { isRTL, end } = useRTL();
+    }, [language, formData.language]);
+    const { end } = useRTL();
 
     const styles = StyleSheet.create({
         container: {

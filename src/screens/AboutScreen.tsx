@@ -10,13 +10,11 @@ import {
     StyleSheet,
     ScrollView,
     TouchableOpacity,
-    Linking,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppStackParamList } from '../navigation/types';
 import useColors from '../hooks/useColors';
-import { useLanguage } from '../contexts/LanguageContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // Temporarily disabled for stability
 // import FadeInView from '../components/FadeInView';
@@ -30,9 +28,6 @@ const AboutScreen: React.FC = () => {
     const appVersion = '1.0.0';
     const buildNumber = '100';
 
-    const handleOpenLink = (url: string) => {
-        Linking.openURL(url).catch((err) => console.error('Error opening link:', err));
-    };
 
     const styles = StyleSheet.create({
         container: {

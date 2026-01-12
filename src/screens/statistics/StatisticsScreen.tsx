@@ -10,7 +10,6 @@ import {
     StyleSheet,
     ScrollView,
     RefreshControl,
-    ActivityIndicator,
     Dimensions,
     TouchableOpacity,
     Animated,
@@ -25,12 +24,11 @@ import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AppStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
 type StatisticsScreenNavigationProp = StackNavigationProp<AppStackParamList, 'Statistics'>;
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_PADDING = 16;
 const CARD_GAP = 12;
 const CARD_WIDTH = (SCREEN_WIDTH - (CARD_PADDING * 2) - CARD_GAP) / 2;
@@ -435,7 +433,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, color, subtitle
                 }),
             ])
         ).start();
-    }, []);
+    }, [delay, value, scaleAnim, opacityAnim, numberAnim, iconScaleAnim]);
 
     return (
         <Animated.View
@@ -837,7 +835,7 @@ const StatisticsScreen: React.FC = () => {
                 useNativeDriver: true,
             }),
         ]).start();
-    }, []);
+    }, [loadStatistics, fadeAnim, slideAnim]);
 
     useEffect(() => {
         if (aiStatistics) {
@@ -853,9 +851,9 @@ const StatisticsScreen: React.FC = () => {
                 useNativeDriver: false,
             }).start();
         }
-    }, [aiStatistics]);
+    }, [aiStatistics, progressAnim]);
 
-    const loadStatistics = async () => {
+    const loadStatistics = useCallback(async () => {
         try {
             await Promise.all([
                 dispatch(fetchAIStatistics()),
@@ -865,7 +863,7 @@ const StatisticsScreen: React.FC = () => {
         } catch (error) {
             console.error('Error loading statistics:', error);
         }
-    };
+    }, [dispatch]);
 
     const onRefresh = async () => {
         setRefreshing(true);

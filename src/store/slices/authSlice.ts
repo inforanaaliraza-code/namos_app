@@ -5,7 +5,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState, User, LoginRequest, RegisterRequest } from '../../types/auth.types';
 import { authAPI } from '../../api/auth.api';
-import { setSecureToken, clearToken, setUserData, getUserData, getSecureTokens, setToken, setRefreshToken, STORAGE_KEYS } from '../../utils/storage';
+import { setSecureToken, clearToken, setUserData, getSecureTokens, setToken, setRefreshToken, STORAGE_KEYS } from '../../utils/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { normalizeAxiosError } from '../../utils/errors';
 
@@ -106,10 +106,10 @@ export const resetPassword = createAsyncThunk(
 // Logout
 export const logoutUser = createAsyncThunk(
     'auth/logout',
-    async (_, { rejectWithValue }) => {
+    async (_, { rejectWithValue: _rejectWithValue }) => {
         try {
             await authAPI.logout();
-        } catch (error: any) {
+        } catch {
             // Still clear local storage even if API fails
             console.warn('Logout API failed, clearing local data anyway');
         } finally {
@@ -141,7 +141,7 @@ export const fetchCurrentUser = createAsyncThunk(
 // Can be called directly (app start) or after biometric authentication
 export const autoLogin = createAsyncThunk(
     'auth/autoLogin',
-    async (options: { skipLogoutCheck?: boolean } = {}, { rejectWithValue, dispatch }) => {
+    async (options: { skipLogoutCheck?: boolean } = {}, { rejectWithValue: _rejectWithValue, dispatch: _dispatch }) => {
         try {
             const skipLogoutCheck = options?.skipLogoutCheck || false;
             

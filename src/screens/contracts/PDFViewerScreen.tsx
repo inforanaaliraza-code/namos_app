@@ -3,15 +3,13 @@
  * Displays PDF documents for contracts
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     View,
     StyleSheet,
-    ActivityIndicator,
     Text,
     TouchableOpacity,
     Share,
-    Platform,
 } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -187,9 +185,9 @@ const PDFViewerScreen: React.FC<Props> = ({ route, navigation }) => {
                 </View>
             ),
         });
-    }, [navigation, title]);
+    }, [navigation, title, Colors.foreground, handleShare, styles.headerButton, styles.headerButtons]);
 
-    const handleShare = async () => {
+    const handleShare = useCallback(async () => {
         try {
             if (!uri) return;
 
@@ -200,7 +198,7 @@ const PDFViewerScreen: React.FC<Props> = ({ route, navigation }) => {
         } catch (err) {
             console.error('Error sharing PDF:', err);
         }
-    };
+    }, [uri, title]);
 
     const handleLoadComplete = (numberOfPages: number) => {
         setTotalPages(numberOfPages);

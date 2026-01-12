@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useColors } from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FadeInView from '../../components/FadeInView';
 
@@ -219,7 +218,7 @@ const OnboardingScreen: React.FC = () => {
                 </View>
             </FadeInView>
         );
-    }, [Colors]);
+    }, [styles.description, styles.icon, styles.iconContainer, styles.slide, styles.title]);
 
     const renderDots = () => {
         return (

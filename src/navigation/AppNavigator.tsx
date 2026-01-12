@@ -10,7 +10,6 @@ import { AppStackParamList, MainTabsParamList } from './types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Import screens
-import DashboardScreen from '../screens/dashboard/DashboardScreen';
 import ConversationsScreen from '../screens/chat/ConversationsScreen';
 import ChatScreen from '../screens/chat/ChatScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
@@ -183,13 +182,10 @@ const AppNavigator: React.FC = () => {
     const { language, isRTL } = useLanguage();
 
     // Create RTL-wrapped versions of ALL components
-    const RTLDashboard = useMemo(() => withRTL(DashboardScreen), []);
     const RTLChat = useMemo(() => withRTL(ChatScreen), []);
     const RTLSearchScreen = useMemo(() => withRTL(SearchScreen), []);
-    const RTLConversations = useMemo(() => withRTL(ConversationsScreen), []);
     const RTLContractsList = useMemo(() => withRTL(ContractsListScreen), []);
     const RTLGenerateContract = useMemo(() => withRTL(GenerateContractScreen), []);
-    const RTLCredits = useMemo(() => withRTL(CreditsScreen), []);
     const RTLCheckout = useMemo(() => withRTL(CheckoutScreen), []);
     const RTLCreditRequest = useMemo(() => withRTL(CreditRequestScreen), []);
     const RTLCreditRequestHistory = useMemo(() => withRTL(CreditRequestHistoryScreen), []);

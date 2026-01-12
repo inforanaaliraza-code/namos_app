@@ -17,7 +17,6 @@ import { AppStackParamList } from '../../navigation/types';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 // Temporarily disabled for stability
 // import FadeInView from '../../components/FadeInView';
 
@@ -218,7 +217,7 @@ const PricingScreen: React.FC = () => {
         },
     ];
 
-    const handleSelectPlan = (planId: string) => {
+    const handleSelectPlan = (_planId: string) => {
         navigation.navigate('MainTabs', { screen: 'Credits' });
     };
 

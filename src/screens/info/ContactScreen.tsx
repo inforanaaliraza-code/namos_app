@@ -18,7 +18,6 @@ import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAppSelector } from '../../store/hooks';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
 const ContactScreen: React.FC = () => {
@@ -146,7 +145,7 @@ const ContactScreen: React.FC = () => {
             Alert.alert(t('common.success'), t('info.messageSent'));
             setSubject('');
             setMessage('');
-        } catch (error) {
+        } catch {
             Alert.alert(t('common.error'), t('info.failedToSend'));
         } finally {
             setLoading(false);

@@ -9,7 +9,6 @@ import {
     RefreshControl,
     Image,
     TextInput,
-    FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -20,9 +19,7 @@ import { fetchAuditStats } from '../../store/slices/statisticsSlice';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import FadeIn from '../../components/animations/FadeIn';
-import ScaleIn from '../../components/animations/ScaleIn';
 // Temporarily disabled for stability
 // import LoadingOverlay from '../../components/LoadingOverlay';
 // import FadeInView from '../../components/FadeInView';
@@ -58,16 +55,19 @@ const DashboardScreen: React.FC = () => {
     const { auditStats } = useAppSelector((state) => state.statistics);
 
     // Ensure conversations is always an array
-    const conversations = Array.isArray(conversationsState) ? conversationsState : [];
+    const conversations = useMemo(
+        () => (Array.isArray(conversationsState) ? conversationsState : []),
+        [conversationsState]
+    );
 
     const [refreshing, setRefreshing] = useState(false);
     const [consultationInput, setConsultationInput] = useState('');
 
     useEffect(() => {
         loadDashboardData();
-    }, []);
+    }, [loadDashboardData]);
 
-    const loadDashboardData = async () => {
+    const loadDashboardData = useCallback(async () => {
         try {
             await Promise.all([
                 dispatch(fetchConversations()),
@@ -78,7 +78,7 @@ const DashboardScreen: React.FC = () => {
         } catch (error) {
             console.error('Error loading dashboard:', error);
         }
-    };
+    }, [dispatch]);
 
     const onRefresh = async () => {
         setRefreshing(true);
@@ -117,7 +117,6 @@ const DashboardScreen: React.FC = () => {
 
     // Memoize recent conversations to avoid unnecessary recalculations
     const recentConversations = useMemo(() => conversations.slice(0, 3), [conversations]);
-    const isLoading = refreshing && conversations.length === 0 && (!credits || credits.remainingCredits === undefined);
 
     return (
         <View style={styles.container}>

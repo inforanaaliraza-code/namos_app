@@ -3,7 +3,7 @@
  * User profile with stats, menu items, and navigation
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
     Text,
@@ -20,7 +20,6 @@ import { fetchContracts } from '../../store/slices/contractsSlice';
 import { fetchCredits } from '../../store/slices/creditsSlice';
 import { fetchAuditStats } from '../../store/slices/statisticsSlice';
 import { logoutUser } from '../../store/slices/authSlice';
-import { useLanguage } from '../../contexts/LanguageContext';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
@@ -32,10 +31,6 @@ const ProfileScreen: React.FC = () => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
     const { user } = useAppSelector((state) => state.auth);
-    const { conversations } = useAppSelector((state) => state.chat);
-    const { contracts } = useAppSelector((state) => state.contracts);
-    const { credits } = useAppSelector((state) => state.credits);
-    const { auditStats } = useAppSelector((state) => state.statistics);
     const { t } = useTranslation();
     const Colors = useColors();
 
@@ -261,9 +256,9 @@ const ProfileScreen: React.FC = () => {
         if (user) {
             loadStats();
         }
-    }, [user]);
+    }, [user, loadStats]);
 
-    const loadStats = async () => {
+    const loadStats = useCallback(async () => {
         // Don't fetch if user is not authenticated
         if (!user) {
             console.log('[ProfileScreen] User not authenticated, skipping stats load');
@@ -286,7 +281,7 @@ const ProfileScreen: React.FC = () => {
                 console.error('[ProfileScreen] Error loading stats:', error);
             }
         }
-    };
+    }, [user, dispatch]);
 
 
     const handleLogout = () => {
@@ -349,7 +344,6 @@ const ProfileScreen: React.FC = () => {
         },
     ];
 
-    const isLoading = !user || conversations.length === 0;
     return (
         <View style={styles.container}>
             {/* Temporarily disabled LoadingOverlay and FadeInView for stability */}
@@ -394,7 +388,7 @@ const ProfileScreen: React.FC = () => {
                 {/* Menu Items */}
                 <FadeIn delay={400}>
                     <View style={styles.menuContainer}>
-                        {menuItems.map((item: any, index: number) => (
+                        {menuItems.map((item: any, _index: number) => (
                             <PressableScale key={item.id} scaleTo={0.97}>
                                 <TouchableOpacity
                                     style={styles.menuItem}

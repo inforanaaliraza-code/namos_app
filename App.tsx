@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { PaperProvider } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar, ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 // CRITICAL: Initialize i18n FIRST, before any other imports that might use translations

@@ -5,7 +5,6 @@
 
 import { Platform } from 'react-native';
 // @ts-ignore - Stripe types may not be available
-import { initStripe, useStripe, useApplePay } from '@stripe/stripe-react-native';
 
 // TODO: Initialize Stripe with publishable key from environment
 // const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY || '';
@@ -73,9 +72,9 @@ class PaymentService {
      * Process card payment
      */
     async processCardPayment(
-        paymentIntentId: string,
-        clientSecret: string,
-        cardDetails: {
+        _paymentIntentId: string,
+        _clientSecret: string,
+        _cardDetails: {
             number: string;
             expiryMonth: number;
             expiryYear: number;
@@ -116,9 +115,9 @@ class PaymentService {
      * Process Apple Pay payment
      */
     async processApplePay(
-        paymentIntentId: string,
-        amount: number,
-        currency: string = 'SAR'
+        _paymentIntentId: string,
+        _amount: number,
+        _currency: string = 'SAR'
     ): Promise<{ success: boolean; paymentIntentId: string }> {
         if (Platform.OS !== 'ios') {
             throw new Error('Apple Pay is only available on iOS');
@@ -162,9 +161,9 @@ class PaymentService {
      * Process STC Pay payment
      */
     async processSTCPay(
-        paymentIntentId: string,
-        phoneNumber: string,
-        amount: number
+        _paymentIntentId: string,
+        _phoneNumber: string,
+        _amount: number
     ): Promise<{ success: boolean; paymentIntentId: string; transactionId: string }> {
         try {
             // TODO: Integrate STC Pay SDK
@@ -190,8 +189,8 @@ class PaymentService {
      * Confirm payment with backend
      */
     async confirmPayment(
-        paymentIntentId: string,
-        paymentMethodId?: string
+        _paymentIntentId: string,
+        _paymentMethodId?: string
     ): Promise<{ success: boolean; credits: number }> {
         try {
             // TODO: Call backend API to confirm payment
@@ -206,9 +205,10 @@ class PaymentService {
                 success: true,
                 credits: 200, // Mock credits
             };
-        } catch (error: any) {
-            console.error('[Payment] Payment confirmation failed:', error);
-            throw new Error(error.message || 'Payment confirmation failed');
+            // eslint-disable-next-line no-unreachable
+        } catch {
+            // Unreachable in current implementation, but kept for future API error handling
+            throw new Error('Payment confirmation failed');
         }
     }
 
@@ -223,7 +223,9 @@ class PaymentService {
             // const { isApplePaySupported } = useApplePay();
             // return await isApplePaySupported();
             return false; // Mock for now
-        } catch (error) {
+            // eslint-disable-next-line no-unreachable
+        } catch {
+            // Unreachable in current implementation, but kept for future API error handling
             return false;
         }
     }

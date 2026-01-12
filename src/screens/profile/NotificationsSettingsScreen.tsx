@@ -9,13 +9,11 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    TouchableOpacity,
     Switch,
 } from 'react-native';
 import { useColors } from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FadeInView from '../../components/FadeInView';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 interface NotificationSetting {
     id: string;

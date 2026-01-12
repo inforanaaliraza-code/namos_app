@@ -23,7 +23,6 @@ import { creditRequestAPI } from '../../api/creditRequest.api';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
 type CreditRequestScreenNavigationProp = StackNavigationProp<AppStackParamList, 'CreditRequest'>;

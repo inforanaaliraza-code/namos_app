@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -16,7 +16,6 @@ import { API_CONFIG } from '../../config/api.config';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import { useColors } from '../../hooks/useColors';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 type RouteParams = {
     VerifyEmail: {
@@ -29,7 +28,7 @@ const VerifyEmailScreen: React.FC = () => {
     const navigation = useNavigation();
     const route = useRoute<RouteProp<RouteParams, 'VerifyEmail'>>();
     const dispatch = useAppDispatch();
-    const { isLoading, error } = useAppSelector((state) => state.auth);
+    const { error } = useAppSelector((state) => state.auth);
     const Colors = useColors();
 
 
@@ -55,7 +54,7 @@ const VerifyEmailScreen: React.FC = () => {
         );
 
         return () => backHandler.remove();
-    }, []);
+    }, [navigation]);
 
     useEffect(() => {
         console.log('[VERIFY_EMAIL] Screen mounted with params:', route.params);
@@ -69,7 +68,7 @@ const VerifyEmailScreen: React.FC = () => {
         } else {
             console.log('[VERIFY_EMAIL] No token provided, waiting for manual verification');
         }
-    }, [token]);
+    }, [token, email, handleVerify, route.params]);
 
     useEffect(() => {
         if (error) {
@@ -95,7 +94,7 @@ const VerifyEmailScreen: React.FC = () => {
         }
     }, [countdown]);
 
-    const handleVerify = async (verificationToken: string) => {
+    const handleVerify = useCallback(async (verificationToken: string) => {
         try {
             console.log('[VERIFY_EMAIL] Starting verification with token:', verificationToken);
             await dispatch(verifyEmail(verificationToken)).unwrap();
@@ -114,7 +113,7 @@ const VerifyEmailScreen: React.FC = () => {
             setVerificationError(err.toString());
             // Error handled by useEffect
         }
-    };
+    }, [dispatch]);
 
     const handleResendVerification = async () => {
         if (!email) {
@@ -146,11 +145,11 @@ const VerifyEmailScreen: React.FC = () => {
                 setCountdown(30);
                 setCanResend(false);
             }
-        } catch (error: any) {
+        } catch (resendError: any) {
             Toast.show({
                 type: 'error',
                 text1: 'Resend Failed',
-                text2: error.response?.data?.message || 'Failed to resend verification email',
+                text2: resendError.response?.data?.message || 'Failed to resend verification email',
             });
         } finally {
             setIsResending(false);

@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Text, TextProps, StyleSheet } from 'react-native';
+import { Text, TextProps } from 'react-native';
 import { useRTL } from '../hooks/useRTL';
 
 interface RTLTextProps extends TextProps {

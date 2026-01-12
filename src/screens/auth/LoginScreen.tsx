@@ -25,7 +25,6 @@ import {
 } from '../../utils/biometric';
 import {
     isBiometricEnabled,
-    setBiometricEnabled,
 } from '../../utils/storage';
 import { useColors } from '../../hooks/useColors';
 import BiometricPromptModal from '../../components/BiometricPromptModal';
@@ -35,7 +34,6 @@ import { useTranslation } from 'react-i18next';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import FadeInView from '../../components/FadeInView';
 import { globalRTLStyles, getRTLMargin } from '../../styles/globalRTL';
-import { useRTL } from '../../hooks/useRTL';
 
 const LoginScreen: React.FC = () => {
     const navigation = useNavigation();
@@ -75,7 +73,7 @@ const LoginScreen: React.FC = () => {
                 position: 'top',
             });
         }
-    }, [error]);
+    }, [error, t]);
 
     const checkBiometric = async () => {
         try {
@@ -104,8 +102,8 @@ const LoginScreen: React.FC = () => {
                 console.log('[LoginScreen] Biometric hardware not available');
                 setBiometricEnabled(false);
             }
-        } catch (error) {
-            console.error('[LoginScreen] Error checking biometric:', error);
+        } catch (biometricError) {
+            console.error('[LoginScreen] Error checking biometric:', biometricError);
             setBiometricAvailable(false);
             setBiometricEnabled(false);
         }
@@ -255,8 +253,8 @@ const LoginScreen: React.FC = () => {
                     });
                 }
             }
-        } catch (error: any) {
-            console.error('[LoginScreen] Biometric login error:', error);
+        } catch (bioError: any) {
+            console.error('[LoginScreen] Biometric login error:', bioError);
             Toast.show({
                 type: 'error',
                 text1: t('common.error'),
@@ -343,13 +341,12 @@ const LoginScreen: React.FC = () => {
                     );
                 }, 500);
             }
-        } catch (err: any) {
+        } catch {
             // Error handled by useEffect
         }
     };
 
     const { isRTL } = useLanguage();
-    const { start, end } = useRTL();
 
     const styles = StyleSheet.create({
         container: {

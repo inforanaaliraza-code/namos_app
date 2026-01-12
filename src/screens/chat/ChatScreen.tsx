@@ -28,25 +28,20 @@ import {
     fetchMessages,
     fetchConversations,
     addMessage,
-    setIsTyping,
     clearError,
     deleteConversation as deleteConversationAction,
     updateConversation,
 } from '../../store/slices/chatSlice';
 import { wsService } from '../../services/websocket.service';
-import { chatAPI } from '../../api/chat.api';
 import useColors from '../../hooks/useColors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Message, MessageVersion } from '../../types/chat.types';
 import { AppStackParamList } from '../../navigation/types';
 import Toast from 'react-native-toast-message';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { useTheme } from '../../contexts/ThemeContext';
-import PressableScale from '../../components/animations/PressableScale';
 
 // App logo used as AI agent avatar
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Logo = require('../../assets/logo.png');
 
 type ChatScreenRouteProp = RouteProp<AppStackParamList, 'Chat'>;
@@ -89,12 +84,12 @@ const ChatScreen: React.FC = () => {
     const isFirstLoadRef = useRef<boolean>(true);
     const previousMessageContentsRef = useRef<Record<string, string>>({});
     const [messageForEdit, setMessageForEdit] = useState<Message | null>(null);
-    const [messageForVersions, setMessageForVersions] = useState<Message | null>(null);
+    const [messageForVersions] = useState<Message | null>(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [editText, setEditText] = useState('');
     const [showVersionModal, setShowVersionModal] = useState(false);
-    const [messageVersions, setMessageVersions] = useState<MessageVersion[]>([]);
-    const [isLoadingVersions, setIsLoadingVersions] = useState(false);
+    const [messageVersions] = useState<MessageVersion[]>([]);
+    const [isLoadingVersions] = useState(false);
     const [regeneratingMessageId, setRegeneratingMessageId] = useState<string | null>(null);
     const [messageVersionIndex, setMessageVersionIndex] = useState<Record<string, number>>({});
     const [renameConversationId, setRenameConversationId] = useState<string | null>(null);
@@ -110,18 +105,12 @@ const ChatScreen: React.FC = () => {
     const [drawerSearch, setDrawerSearch] = useState('');
     const [showAuthModal, setShowAuthModal] = useState(false);
 
-    const currentMessages = activeConversationId ? messages[activeConversationId] || [] : [];
+    const currentMessages = useMemo(
+        () => (activeConversationId ? messages[activeConversationId] || [] : []),
+        [activeConversationId, messages]
+    );
     const isEmpty = currentMessages.length === 0;
 
-    // Suggested questions based on legal domains
-    const suggestedQuestions = [
-        'What are my rights as an employee in Saudi Arabia?',
-        'How to draft a rental agreement?',
-        'What is the process for business registration?',
-        'How to file for divorce in Saudi Arabia?',
-        'What are the penalties for traffic violations?',
-        'How to resolve a commercial dispute?',
-    ];
 
     useEffect(() => {
         if (!accessToken) {
@@ -190,7 +179,7 @@ const ChatScreen: React.FC = () => {
             headerStyle: { backgroundColor: DarkBG, shadowColor: 'transparent' },
             headerTintColor: DarkText,
         });
-    }, [activeConversationId, isAuthenticated, navigation, Colors.foreground, Colors.primary, t]);
+    }, [activeConversationId, isAuthenticated, navigation, Colors.foreground, Colors.primary, t, DarkBG, DarkText, handleExportConversation]);
 
     useEffect(() => {
         if (activeConversationId) {
@@ -1217,9 +1206,6 @@ const ChatScreen: React.FC = () => {
         }
     };
 
-    const handleSuggestionPress = (suggestion: string) => {
-        setInputText(suggestion);
-    };
 
     const handleNewChat = () => {
         setActiveConversationId(null);
@@ -1375,26 +1361,6 @@ const ChatScreen: React.FC = () => {
         }
     };
 
-    const handleViewVersions = async (message: Message) => {
-        if (!activeConversationId) return;
-
-        setMessageForVersions(message);
-        setShowVersionModal(true);
-        setIsLoadingVersions(true);
-
-        try {
-            const versions = await chatAPI.getMessageVersions(message.id);
-            setMessageVersions(versions);
-        } catch (error: any) {
-            Toast.show({
-                type: 'error',
-                text1: t('common.error'),
-                text2: error.message || t('chat.versionsFailed'),
-            });
-        } finally {
-            setIsLoadingVersions(false);
-        }
-    };
 
     const handleSwitchVersion = (message: Message, direction: 'prev' | 'next') => {
         if (!message.totalVersions || message.totalVersions <= 1) return;
@@ -1463,7 +1429,7 @@ const ChatScreen: React.FC = () => {
         setRenameConversationId(null);
     };
 
-    const handleExportConversation = async () => {
+    const handleExportConversation = useCallback(async () => {
         if (!activeConversationId || currentMessages.length === 0) return;
 
         try {
@@ -1488,7 +1454,7 @@ const ChatScreen: React.FC = () => {
                 });
             }
         }
-    };
+    }, [activeConversationId, currentMessages, t]);
 
     const MessageItem = memo(({ item }: { item: Message }) => {
         const isUser = item.role === 'user';
@@ -1645,7 +1611,7 @@ const ChatScreen: React.FC = () => {
 
     const renderMessage = useCallback(
         ({ item }: { item: Message }) => <MessageItem item={item} />,
-        [streamingMessage, loadingStates, regeneratingMessageId]
+        [MessageItem]
     );
 
     const keyExtractor = useCallback((item: Message) => item.id, []);
